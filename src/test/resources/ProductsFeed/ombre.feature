@@ -7,5 +7,3 @@ Feature: User adds a product to the cart
     And page with product details has been opened
     And user clicks on the cart which is under the picture of product
     Then product has been added to the cart
-    And main cart changed colour to red
-    And number has been displayed next to the chart
