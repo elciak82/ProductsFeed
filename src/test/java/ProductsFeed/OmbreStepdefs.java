@@ -46,7 +46,7 @@ public class OmbreStepdefs {
     }
 
     @When("^user clicks on a product$")
-    public void userClicksOnAPproduct() {
+    public void userClicksOnAProduct() {
         allProductsPage.clickOnProduct(1);
     }
 
