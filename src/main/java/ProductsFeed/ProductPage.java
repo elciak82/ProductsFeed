@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ProductPage extends Base {
+public class ProductPage extends MainPage {
 
     String pageTitleCss = "div#content h1";
     String productCartCss = ".add-to-cart";

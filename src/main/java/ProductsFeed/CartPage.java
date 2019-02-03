@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class CartPage extends Base {
+public class CartPage extends MainPage {
 
     String productInCartPriceCss = ".product_price";
     String productInCartQuantityCss = ".product_quantity";

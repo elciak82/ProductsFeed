@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllProductsPage extends Base{
+public class AllProductsPage extends MainPage{
 
     String productTileCss = "div.product";
     String productNameTileCss = "p.name";
@@ -36,13 +36,13 @@ public class AllProductsPage extends Base{
         productCartTile.get(productNumber).click();
     }
 
-    public void addProductsToCart (List<Integer> productsList){
-        List<WebElement> productsCartTile = driver.findElements(By.cssSelector(productCartTileCss));
-        for (int productNumber:productsList) {
-            System.out.println("Add product " + productNumber + " to the cart.");
-            productsCartTile.get(productNumber).click();
-        }
-    }
+//    public void addProductsToCart (List<Integer> productsList){
+//        List<WebElement> productsCartTile = driver.findElements(By.cssSelector(productCartTileCss));
+//        for (int productNumber:productsList) {
+//            System.out.println("Add product " + productNumber + " to the cart.");
+//            productsCartTile.get(productNumber).click();
+//        }
+//    } bez sensu
 
     public String getProductPrice (int productNumber){
         List<WebElement> productPriceTile = driver.findElements(By.cssSelector(productPriceTileCss));
