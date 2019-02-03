@@ -1,85 +1,75 @@
 package ProductsFeed;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllProductsPage {
+public class AllProductsPage extends Base{
 
-    @FindBy(css = "div.product")
-    private List<WebElement> productTile;
+    String productTileCss = "div.product";
+    String productNameTileCss = "p.name";
+    String productPriceTileCss = "p.price";
+    String productCartTileCss = ".add-to-cart";
+    String pageTitleCss = "div#content h1";
 
-    @FindBy(css = "p.name")
-    private List<WebElement> productNameTile;
-
-    @FindBy(css = "p.price")
-    private List<WebElement> productPriceTile;
-
-    @FindBy(css = ".add-to-cart")
-    private List<WebElement> productCartTile;
-
-    @FindBy(css = "div#content h1")
-    private WebElement pageTitle;
+    public AllProductsPage(WebDriver driver) {
+        super(driver);
+    }
 
     public String getPageTitle(){
-        return pageTitle.getTagName();
+        WebElement pageTitle = driver.findElement(By.cssSelector(pageTitleCss));
+        return pageTitle.getText();
     }
 
-    public void clickOnProduct (String productName){
-        int size = productNameTile.size();
-        int i = 0;
-        while(!productNameTile.get(i).getText().equals(productName) && i < size) {
-            i++;
-        }
-        System.out.println("Click on the product: " + productName + ".");
-        productNameTile.get(i).click();
+    public void clickOnProduct(int productNumber) {
+        List<WebElement> productTile = driver.findElements(By.cssSelector(productTileCss));
+        System.out.println("Click on the product: " + productNumber + " tile.");
+        productTile.get(productNumber).click();
     }
 
-    public void addProductToCart (String productName){
-        int size = productNameTile.size();
-        int i = 0;
-        while(!productNameTile.get(i).getText().equals(productName) && i < size) {
-            i++;
-        }
-        System.out.println("Add product " + productName + " to the cart." );
-        productCartTile.get(i).click();
+    public void addProductToCart (int productNumber){
+        List<WebElement> productCartTile = driver.findElements(By.cssSelector(productCartTileCss));
+        System.out.println("Add product " + productNumber + " to the cart." );
+        productCartTile.get(productNumber).click();
     }
 
-    public void addProductsToCart (List<String> productNames){
-        int size = productNameTile.size();
-        int i = 0;
-        for (String productName:productNames) {
-            while (!productNameTile.get(i).getText().equals(productName) && i < size) {
-                i++;
-            }
-            System.out.println("Add product " + productName + " to the cart.");
-            productCartTile.get(i).click();
+    public void addProductsToCart (List<Integer> productsList){
+        List<WebElement> productsCartTile = driver.findElements(By.cssSelector(productCartTileCss));
+        for (int productNumber:productsList) {
+            System.out.println("Add product " + productNumber + " to the cart.");
+            productsCartTile.get(productNumber).click();
         }
     }
 
-    public String getProductPrice (String productName){
-        int size = productNameTile.size();
-        int i = 0;
-        while(!productNameTile.get(i).getText().equals(productName) && i < size) {
-            i++;
-        }
-        String productPrice = productPriceTile.get(i).getText();
-        System.out.println("Product " + productName + " price: " + productPrice + ".");
+    public String getProductPrice (int productNumber){
+        List<WebElement> productPriceTile = driver.findElements(By.cssSelector(productPriceTileCss));
+        String productPrice = productPriceTile.get(productNumber).getText();
+        System.out.println("Product " + productNumber + " price: " + productPrice + ".");
         return productPrice;
     }
 
-    public List<String> getProductsPrices (List<String> productNames){
-        int size = productNameTile.size();
-        int i = 0;
+    public List<String> getProductsPricesFromTile (List<Integer> productsList){
+        List<WebElement> productsPrices = driver.findElements(By.cssSelector(productPriceTileCss));
         List<String> listOfPrices = new ArrayList<>();
-        for (String productName:productNames) {
-            while (!productNameTile.get(i).getText().equals(productName) && i < size) {
-                i++;
-            }
+        for (int productNumber:productsList) {
+            System.out.println("Add product " + productNumber + " to the cart.");
+            productsPrices.get(productNumber).getText();
         }
         return listOfPrices;
     }
+
+//    public List<String> getProductsPrices (List<String> productNames){
+//        int size = productNameTile.size();
+//        int i = 0;
+//        List<String> listOfPrices = new ArrayList<>();
+//        for (String productName:productNames) {
+//            while (!productNameTile.get(i).getText().equals(productName) && i < size) {
+//                i++;
+//            }
+//        }
+//        return listOfPrices;
+//    }
 }
