@@ -76,7 +76,8 @@ public class OmbreStepdefs {
     @When("^user add \"([^\"]*)\" products to cart$")
     public void userAddProductsToCart(String numberOfProducts) {
         int number = Integer.parseInt(numberOfProducts);
-        for (int i=0; i < number; i++)
+        for (int i=0; i < number; i++) {
             allProductsPage.addProductToCart(i);
+        }
     }
 }
