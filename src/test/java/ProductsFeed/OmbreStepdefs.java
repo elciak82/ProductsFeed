@@ -55,7 +55,7 @@ public class OmbreStepdefs {
         Assert.assertTrue(productPage.getPageTitle().equals("Product page"));
     }
 
-    @When("^user clicks on the cart which is under the picture of product$")
+    @When("^user clicks on the cart which is under the picture of the product$")
     public void userClicksOnTheCartWhichIsUnderThePictureOfProduct() {
         productPage.addProductToCart();
     }
@@ -67,16 +67,16 @@ public class OmbreStepdefs {
         Assert.assertTrue(mainPage.cartHasRedColor());
     }
 
-    @When("^products have been added to the cart$")
-    public void productHaveBeenAddedToTheCart() {
+    @Then("^\"([^\"]*)\" products have been added to the cart$")
+    public void productsHaveBeenAddedToTheCart(String numberOfProducts) {
         mainPage.waitForCart();
-        Assert.assertTrue(mainPage.numberOfElementsInCart().equals("2"));
+        Assert.assertTrue(mainPage.numberOfElementsInCart().equals(numberOfProducts));
     }
 
-    @When("^user add two product to cart$")
-    public void userAddTwoProductToCart() {
-        allProductsPage.addProductToCart(0);
-        allProductsPage.addProductToCart(1);
-
+    @When("^user add \"([^\"]*)\" products to cart$")
+    public void userAddProductsToCart(String numberOfProducts) {
+        int number = Integer.parseInt(numberOfProducts);
+        for (int i=0; i < number; i++)
+            allProductsPage.addProductToCart(i);
     }
 }
