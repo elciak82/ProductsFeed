@@ -1,0 +1,5 @@
+ProductsFeed\BasePage.class
+ProductsFeed\ProductPage.class
+ProductsFeed\AllProductsPage.class
+ProductsFeed\Webdriver.class
+ProductsFeed\CartPage.class
