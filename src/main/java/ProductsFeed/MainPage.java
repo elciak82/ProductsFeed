@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class MainPage extends Base{
 
     String homeIconCss = ".fa-home";
-    String cartIconCss = "#cart_icon";
+    String cartIconCss = "div#header a:nth-child(2)";
     String cartCountCss = "#cart_count";
 
     public MainPage(WebDriver driver) {
@@ -26,7 +26,7 @@ public class MainPage extends Base{
         cartIcon.click();
     }
 
-    public String numberOfElementsInCart() {
+    public String numberOfProductsInCart() {
         WebElement cartCount = driver.findElement(By.cssSelector(cartCountCss));
         String numberOfProducts = cartCount.getText();
         return numberOfProducts;
