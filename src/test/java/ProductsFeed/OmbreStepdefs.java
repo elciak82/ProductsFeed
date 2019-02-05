@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class OmbreStepdefs {
@@ -19,6 +20,10 @@ public class OmbreStepdefs {
     public AllProductsPage allProductsPage;
     public ProductPage productPage;
     public Url url;
+    public Random random;
+    public int number;
+    public String numberOfProducts;
+
 
     @Before
     public void startUp() {
@@ -28,6 +33,10 @@ public class OmbreStepdefs {
         mainPage = new MainPage(driver);
         allProductsPage = new AllProductsPage(driver);
         productPage = new ProductPage(driver);
+        random = new Random();
+        number = random.nextInt(20) + 1;
+        numberOfProducts = Integer.toString(number);
+
     }
 
     @After
@@ -69,14 +78,15 @@ public class OmbreStepdefs {
 
     @Then("^\"([^\"]*)\" products have been added to the cart$")
     public void productsHaveBeenAddedToTheCart(String numberOfProducts) {
+        this.numberOfProducts = numberOfProducts;
         mainPage.waitForCart();
         Assert.assertTrue(mainPage.numberOfElementsInCart().equals(numberOfProducts));
     }
 
     @When("^user add \"([^\"]*)\" products to cart$")
     public void userAddProductsToCart(String numberOfProducts) {
-        int number = Integer.parseInt(numberOfProducts);
-        for (int i=0; i < number; i++) {
+        this.numberOfProducts = numberOfProducts;
+        for (int i=0; i < this.number; i++) {
             allProductsPage.addProductToCart(i);
         }
     }

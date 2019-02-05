@@ -14,6 +14,6 @@ Feature: User adds products to the cart
     When user add "<number>" products to cart
     Then "<number>" products have been added to the cart
     Examples:
-    |number|
-    |5     |
-    |10    |
+    |number |
+    |number1|
+    |number2|
