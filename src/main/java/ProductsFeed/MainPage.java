@@ -26,16 +26,20 @@ public class MainPage extends Base{
         cartIcon.click();
     }
 
-    public String numberOfProductsInCart() {
+    public String getNumberOfProductsInCart() {
         WebElement cartCount = driver.findElement(By.cssSelector(cartCountCss));
-        String numberOfProducts = cartCount.getText();
-        return numberOfProducts;
+        System.out.println("Number of products in the cart: " + cartCount.getText() + ".");
+        return cartCount.getText();
     }
 
     public boolean cartHasRedColor() {
         WebElement cartIcon = driver.findElement(By.cssSelector(cartIconCss));
-        if (cartIcon.getCssValue("color") == "#ac2925");
+        if (cartIcon.getCssValue("color") == "#ac2925") {
             return true;
+        }else {
+            System.out.println("Cart icon is not red");
+            return false;
+        }
     }
 
     public void waitForCart(){

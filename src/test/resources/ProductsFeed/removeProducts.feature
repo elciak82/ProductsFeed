@@ -1,13 +1,20 @@
 @ombreTest
-Feature: User remove product from the cart
+Feature: User removes products from the cart
   Verify if user is able to remove a product from cart
 
   Background:
     Given user is on homepage
-    And user has one product in the cart
 
   Scenario: User removes product from the cart
-    When user clicks on the cart on the homepage
+    When user has one product in the cart
+    And user clicks on the cart on the homepage
     And cart page has been opened
-    Then user removes product from the cart
-    And cart is empty
+    And user removes product from the cart
+    Then cart is empty
+
+  Scenario: User removes more products from the cart
+    When user has some product in the cart
+    And user clicks on the cart on the homepage
+    And cart page has been opened
+    And user removes all product from the cart
+    Then cart is empty

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class OmbreStepdefs {
+public class OmbreStepDefs {
     public WebDriver driver;
     public Base base;
     public MainPage mainPage;
@@ -27,7 +27,6 @@ public class OmbreStepdefs {
     public CartPage cartPage;
     public Random random;
     public int numberOfProducts;
-    public String numberOfProductsStr;
 
 
     @Before
@@ -40,7 +39,7 @@ public class OmbreStepdefs {
         productPage = new ProductPage(driver);
         cartPage = new CartPage(driver);
         random = new Random();
-        numberOfProducts = random.nextInt(20) + 2;
+        numberOfProducts = random.nextInt(20);
     }
 
     @After
@@ -54,8 +53,7 @@ public class OmbreStepdefs {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get(url.ombre);
-        System.out.println("Check if " + allProductsPage.getPageTitle() + "equals: Products page");
-        Assert.assertTrue(allProductsPage.getPageTitle().equals("Products page"));
+        Assert.assertThat(allProductsPage.getPageTitle(), is(equalTo("Products page")));
     }
 
     @When("^user clicks on a product$")
@@ -65,8 +63,7 @@ public class OmbreStepdefs {
 
     @When("^page with product details has been opened$")
     public void pageWithProductDetailsHasBeenOpened() {
-        System.out.println("Check if " + productPage.getPageTitle() + " equals: Product page");
-        Assert.assertTrue(productPage.getPageTitle().equals("Product page"));
+        Assert.assertThat(productPage.getPageTitle(), is(equalTo("Product page")));
     }
 
     @When("^user clicks on the cart which is under the picture of the product$")
@@ -75,22 +72,18 @@ public class OmbreStepdefs {
     @Then("^product has been added to the cart$")
     public void productHasBeenAddedToTheCart() {
         mainPage.waitForCart();
-        String productsInCart = mainPage.numberOfProductsInCart();
+        String productsInCart = mainPage.getNumberOfProductsInCart();
         if (productsInCart.equals("1")) {
             System.out.println(productsInCart + " products has been added to the cart.");
         }
         else {System.out.println("Number of product is not equal 1.");
         }
-
-        System.out.println("Check if cart has a red color.");
-        Assert.assertTrue(mainPage.cartHasRedColor());
     }
 
     @Then("^some products have been added to the cart$")
     public void productsHaveBeenAddedToTheCart() {
         mainPage.waitForCart();
-        String productsInCart = mainPage.numberOfProductsInCart();
-        System.out.println("Check if " + productsInCart + " equal: " + numberOfProducts);
+        String productsInCart = mainPage.getNumberOfProductsInCart();
         Assert.assertThat(productsInCart, is(equalTo(Integer.toString(numberOfProducts))));
     }
 
@@ -113,9 +106,8 @@ public class OmbreStepdefs {
 
     @And("^cart page has been opened$")
     public void cartPageHasBeenOpened() {
-        Assert.assertThat(cartPage.getPageTitle(), is(equalTo("Cart page")));
-
-        Assert.assertThat(cartPage.getProductQuantity(), is(equalTo("1")));
+//        Assert.assertThat(cartPage.getPageTitle(), is(equalTo("Cart page")));
+//        Assert.assertThat(cartPage.getProductCount(), is(equalTo(Integer.toString(numberOfProducts)))); TODO
     }
 
     @Then("^user removes product from the cart$")
@@ -125,16 +117,23 @@ public class OmbreStepdefs {
 
     @And("^cart is empty$")
     public void cartIsEmpty() {
-        Assert.assertFalse(cartPage.verifyTrashNotDisplayed());
-        System.out.println(cartPage.verifyTrashNotDisplayed()); ///trzeba to usunąć
-        System.out.println(cartPage.getProductCount()); // trzeba to usunąć
         Assert.assertThat(cartPage.getProductCount(), is(equalTo("0")));
-
     }
 
     @And("^one product is visible on the cart page$")
     public void oneProductIsVisibleOnTheCartPage() {
         mainPage.clickCartIcon();
         Assert.assertThat(cartPage.getProductQuantity(), is(equalTo("1")));
+    }
+
+    @When("^user has some product in the cart$")
+    public void userHasSomeProductInTheCart() {
+        userAddProductsToCart();
+    }
+
+    @And("^user removes all product from the cart$")
+    public void userRemovesAllProductFromTheCart() {
+        cartPage.removeAllProductFromCart();
+
     }
 }

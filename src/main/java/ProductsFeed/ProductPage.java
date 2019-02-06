@@ -15,6 +15,7 @@ public class ProductPage extends MainPage {
 
     public String getPageTitle(){
         WebElement pageTitle = driver.findElement(By.cssSelector(pageTitleCss));
+        System.out.println("Product title is: " + pageTitle.getText() + ".");
         return pageTitle.getText();
     }
 

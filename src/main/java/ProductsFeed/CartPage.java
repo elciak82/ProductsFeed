@@ -3,6 +3,8 @@ package ProductsFeed;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -31,33 +33,46 @@ public class CartPage extends MainPage {
 
     public String getPageTitle(){
         WebElement pageTitle = driver.findElement(By.cssSelector(pageTitleCss));
+        System.out.println("Page title is: " + pageTitle.getText() + ".");
         return pageTitle.getText();
     }
 
-    public String getProductQuantity(){ ///może zamienić na count??
+    public String getProductQuantity(){
         WebElement quantity = driver.findElement(By.cssSelector(quantityCss));
-        System.out.println(quantity.getAttribute("value"));
+        System.out.println("Product quantity is: " + quantity.getAttribute("value") + ".");
         return quantity.getAttribute("value");
     }
 
     public void removeProductFromCart(){
         WebElement trash = driver.findElement(By.cssSelector(trashCss));
         trash.click();
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.invisibilityOf(trash));
     }
-
 
     public String getProductCount(){
         WebElement productCount = driver.findElement(By.cssSelector(productCountCss));
+        System.out.println("Product count is: " + productCount.getText() + ".");
         return productCount.getText();
     }
 
     public String getProductPrice (int productNumber){
         List<WebElement> productInCartPrice = driver.findElements(By.cssSelector(productPriceCss));
-        List<WebElement> productInCartName = driver.findElements(By.cssSelector(productNameCss));
         String productPrice = productInCartPrice.get(productNumber).getText();
-        String productName = productInCartName.get(productNumber).getText();
-        System.out.println("Product: " + productName + "price: " + productPrice + ".");
+        System.out.println("Product number: " + productNumber + " price is " + productPrice + ".");
         return productPrice;
+    }
+
+    public void removeAllProductFromCart() {
+        List<WebElement> trash = driver.findElements(By.cssSelector(trashCss));
+        int numberOfTrash = trash.size();
+        int i = 0;
+        while (i != numberOfTrash) {
+            trash.get(i).click();
+            i++;
+        }
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.invisibilityOf(trash.get(0)));
     }
 
 //    public String getProductPrice (String productName){
