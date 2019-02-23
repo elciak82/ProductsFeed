@@ -138,22 +138,8 @@ public class OmbreStepDefs {
 
     }
 
-    @Given("^user has products in the cart: \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void userHasTwoProductsOnTheCart(int product1, int product2) {
-        allProductsPage.addProductToCart(product1);
-        allProductsPage.addProductToCart(product2);
-
-    }
-
-    @And("^price of product \"([^\"]*)\"$")
-    public int priceOfProduct(int product) {
-        String price = allProductsPage.getProductPrice(product);
-        return Integer.parseInt(price); // jak to zachować globalnie?
-    }
-
-    @Then("^Total is sum of \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void totalIsSumOfAnd(int product1, int product2){
-        int price1 = priceOfProduct(product1);
-        int price2 = priceOfProduct(product2);
+    @And("^user is on cart page$")
+    public void userIsOnCartPage() {
+        allProductsPage.clickCartIcon();
     }
 }
