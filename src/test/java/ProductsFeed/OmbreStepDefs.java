@@ -39,7 +39,7 @@ public class OmbreStepDefs {
         productPage = new ProductPage(driver);
         cartPage = new CartPage(driver);
         random = new Random();
-        numberOfProducts = random.nextInt(20);
+        numberOfProducts = 5;//random.nextInt(5) + 1;
     }
 
     @After
@@ -102,12 +102,13 @@ public class OmbreStepDefs {
     @When("^user clicks on the cart on the homepage$")
     public void userClicksOnTheCartOnTheHomepage() {
         mainPage.clickCartIcon();
+        base.waitForLoad(driver);
     }
 
     @And("^cart page has been opened$")
     public void cartPageHasBeenOpened() {
-//        Assert.assertThat(cartPage.getPageTitle(), is(equalTo("Cart page")));
-//        Assert.assertThat(cartPage.getProductCount(), is(equalTo(Integer.toString(numberOfProducts)))); TODO
+        Assert.assertThat(cartPage.getPageTitle(), is(equalTo("Cart page")));
+//        Assert.assertThat(cartPage.getProductCount(), is(equalTo(Integer.toString(numberOfProducts))));
     }
 
     @Then("^user removes product from the cart$")

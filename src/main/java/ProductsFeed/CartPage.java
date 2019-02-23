@@ -11,7 +11,6 @@ import java.util.List;
 public class CartPage extends MainPage {
 
     String productPriceCss = ".product_price";
-    String productInCartQuantityCss = ".product_quantity";
     String productNameCss = "table#cart tbody tr td:nth-child(2)"; //table z id (#) -> tbody -> tr -> td:nth-child(2)!! w td ente dzecko - child(2) za każdym razem
     String pageTitleCss = "div#content h1";
     String quantityCss = ".product_quantity";
@@ -52,7 +51,6 @@ public class CartPage extends MainPage {
 
     public String getProductCount(){
         WebElement productCount = driver.findElement(By.cssSelector(productCountCss));
-        System.out.println("Product count is: " + productCount.getText() + ".");
         return productCount.getText();
     }
 
@@ -64,15 +62,15 @@ public class CartPage extends MainPage {
     }
 
     public void removeAllProductFromCart() {
-        List<WebElement> trash = driver.findElements(By.cssSelector(trashCss));
-        int numberOfTrash = trash.size();
-        int i = 0;
-        while (i != numberOfTrash) {
-            trash.get(i).click();
-            i++;
+        List<WebElement> trashList = driver.findElements(By.cssSelector(trashCss));
+        for (WebElement trash: trashList) {
+            System.out.println(trash.getAttribute("data-product-id"));
+            trash.click();
+            driver.navigate().refresh();
+//            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.invisibilityOf(trash.get(0)));
+//        WebDriverWait wait = new WebDriverWait(driver, 5);
+//        wait.until(ExpectedConditions.invisibilityOfAllElements(trashList));
     }
 
 //    public String getProductPrice (String productName){
