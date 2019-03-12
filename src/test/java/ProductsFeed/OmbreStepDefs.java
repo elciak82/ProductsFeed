@@ -39,7 +39,7 @@ public class OmbreStepDefs {
         productPage = new ProductPage(driver);
         cartPage = new CartPage(driver);
         random = new Random();
-        numberOfProducts = 5;//random.nextInt(5) + 1;
+        numberOfProducts = 2;//random.nextInt(5) + 1;
     }
 
     @After
@@ -80,15 +80,15 @@ public class OmbreStepDefs {
         }
     }
 
-    @Then("^some products have been added to the cart$")
+    @Then("^two products have been added to the cart$")
     public void productsHaveBeenAddedToTheCart() {
         mainPage.waitForCart();
         String productsInCart = mainPage.getNumberOfProductsInCart();
         Assert.assertThat(productsInCart, is(equalTo(Integer.toString(numberOfProducts))));
     }
 
-    @When("^user add some products to cart$")
-    public void userAddProductsToCart() {
+    @When("^user adds two products to cart$")
+    public void userAddsTwoProductsToCart() {
         for (int i=0; i < numberOfProducts; i++) {
             allProductsPage.addProductToCart(i);
         }
@@ -127,9 +127,9 @@ public class OmbreStepDefs {
         Assert.assertThat(cartPage.getProductQuantity(), is(equalTo("1")));
     }
 
-    @When("^user has some product in the cart$")
-    public void userHasSomeProductInTheCart() {
-        userAddProductsToCart();
+    @When("^user has two product in the cart$")
+    public void userHasTwoProductInTheCart() {
+        userAddsTwoProductsToCart();
     }
 
     @And("^user removes all product from the cart$")
