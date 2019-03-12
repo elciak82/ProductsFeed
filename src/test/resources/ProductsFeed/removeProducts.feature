@@ -7,7 +7,7 @@ Feature: User removes products from the cart
 
   Scenario: User removes ONE product from the cart
     When user has one product in the cart
-    And user clicks on the cart on the homepage
+    And user clicks on the cart
     And cart page has been opened
     And user removes product from the cart
     Then cart is empty
