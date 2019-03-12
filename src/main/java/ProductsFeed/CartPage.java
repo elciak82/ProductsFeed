@@ -18,6 +18,7 @@ public class CartPage extends MainPage {
     private String productCountCss ="#product_count";
     private String registrationCss = ".fa-user";
     private String deliveryCss = ".fa-truck";
+    private String paymentCss = ".fa-money-bill-alt";
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -80,6 +81,11 @@ public class CartPage extends MainPage {
     public void deliveryClick(){
         WebElement delivery = driver.findElement(By.cssSelector(deliveryCss));
         delivery.click();
+    }
+
+    public void paymentClick(){
+        WebElement payment = driver.findElement(By.cssSelector(paymentCss));
+        payment.click();
     }
 
 //    public String getProductPrice (String productName){

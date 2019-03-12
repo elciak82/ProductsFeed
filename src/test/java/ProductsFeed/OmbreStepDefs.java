@@ -28,6 +28,8 @@ public class OmbreStepDefs {
     private Random random;
     private int numberOfProducts;
     private RegistrationPage registrationPage;
+    private DeliveryPage deliveryPage;
+    private PaymentPage paymentPage;
 
 
     @Before
@@ -42,6 +44,8 @@ public class OmbreStepDefs {
         random = new Random();
         numberOfProducts = 2;//random.nextInt(5) + 1;
         registrationPage = new RegistrationPage(driver);
+        deliveryPage = new DeliveryPage(driver);
+        paymentPage = new PaymentPage(driver);
     }
 
     @After
@@ -151,6 +155,18 @@ public class OmbreStepDefs {
     }
 
     @And("^user chooses delivery method$")
-    public void userChoosesDeliveryMethod() {
+    public void userChoosesDeliveryMethod() { //TODO
+        cartPage.deliveryClick();
+        Assert.assertThat(deliveryPage.getPageTitle(),is(equalTo("Delivery page")));
+    }
+
+    @And("^user chooses payment method$")
+    public void userChoosesPaymentMethod() { //TODO
+        cartPage.paymentClick();
+        Assert.assertThat(paymentPage.getPageTitle(),is(equalTo("Payment page")));
+    }
+
+    @And("^user makes checkout$")
+    public void userMakesCheckout() {
     }
 }
