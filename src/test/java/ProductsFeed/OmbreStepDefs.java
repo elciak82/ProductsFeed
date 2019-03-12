@@ -18,15 +18,16 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class OmbreStepDefs {
-    public WebDriver driver;
-    public Base base;
-    public MainPage mainPage;
-    public AllProductsPage allProductsPage;
-    public ProductPage productPage;
-    public Url url;
-    public CartPage cartPage;
-    public Random random;
-    public int numberOfProducts;
+    private WebDriver driver;
+    private Base base;
+    private MainPage mainPage;
+    private AllProductsPage allProductsPage;
+    private ProductPage productPage;
+    private Url url;
+    private CartPage cartPage;
+    private Random random;
+    private int numberOfProducts;
+    private RegistrationPage registrationPage;
 
 
     @Before
@@ -40,6 +41,7 @@ public class OmbreStepDefs {
         cartPage = new CartPage(driver);
         random = new Random();
         numberOfProducts = 2;//random.nextInt(5) + 1;
+        registrationPage = new RegistrationPage(driver);
     }
 
     @After
@@ -99,8 +101,8 @@ public class OmbreStepDefs {
         allProductsPage.addProductToCart(1);
     }
 
-    @When("^user clicks on the cart on the homepage$")
-    public void userClicksOnTheCartOnTheHomepage() {
+    @When("^user clicks on the cart$")
+    public void userClicksOnTheCart() {
         mainPage.clickCartIcon();
         base.waitForLoad(driver);
     }
@@ -135,11 +137,20 @@ public class OmbreStepDefs {
     @And("^user removes all product from the cart$")
     public void userRemovesAllProductFromTheCart() {
         cartPage.removeAllProductFromCart();
-
     }
 
     @And("^user is on cart page$")
     public void userIsOnCartPage() {
         allProductsPage.clickCartIcon();
+    }
+
+    @And("^user makes a registration$") //TODO
+    public void userMakesARegistration() {
+        cartPage.registrationClick();
+        Assert.assertThat(registrationPage.getPageTitle(), is(equalTo("Registration page")));
+    }
+
+    @And("^user chooses delivery method$")
+    public void userChoosesDeliveryMethod() {
     }
 }

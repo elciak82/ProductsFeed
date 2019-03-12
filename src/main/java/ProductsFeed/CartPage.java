@@ -10,12 +10,14 @@ import java.util.List;
 
 public class CartPage extends MainPage {
 
-    String productPriceCss = ".product_price";
-    String productNameCss = "table#cart tbody tr td:nth-child(2)"; //table z id (#) -> tbody -> tr -> td:nth-child(2)!! w td ente dzecko - child(2) za każdym razem
-    String pageTitleCss = "div#content h1";
-    String quantityCss = ".product_quantity";
-    String trashCss =".product_remove";
-    String productCountCss ="#product_count";
+    private String productPriceCss = ".product_price";
+    private String productNameCss = "table#cart tbody tr td:nth-child(2)"; //table z id (#) -> tbody -> tr -> td:nth-child(2)!! w td ente dzecko - child(2) za każdym razem
+    private String pageTitleCss = "div#content h1";
+    private String quantityCss = ".product_quantity";
+    private String trashCss =".product_remove";
+    private String productCountCss ="#product_count";
+    private String registrationCss = ".fa-user";
+    private String deliveryCss = ".fa-truck";
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -63,14 +65,21 @@ public class CartPage extends MainPage {
 
     public void removeAllProductFromCart() {
         List<WebElement> trashList = driver.findElements(By.cssSelector(trashCss));
-        for (WebElement trash: trashList) {
-            System.out.println(trash.getAttribute("data-product-id"));
-            trash.click();
-            driver.navigate().refresh();
-//            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        int elementsInTrash = trashList.size();
+        for (int i = 0; i<elementsInTrash; i++) {
+            trashList.get(i).click();
         }
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.invisibilityOfAllElements(trashList));
+        driver.navigate().refresh();
+    }
+
+    public void registrationClick(){
+        WebElement registration = driver.findElement(By.cssSelector(registrationCss));
+        registration.click();
+    }
+
+    public void deliveryClick(){
+        WebElement delivery = driver.findElement(By.cssSelector(deliveryCss));
+        delivery.click();
     }
 
 //    public String getProductPrice (String productName){
