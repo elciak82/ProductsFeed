@@ -30,6 +30,7 @@ public class OmbreStepDefs {
     private RegistrationPage registrationPage;
     private DeliveryPage deliveryPage;
     private PaymentPage paymentPage;
+    private CheckoutPage checkoutPage;
 
 
     @Before
@@ -46,6 +47,7 @@ public class OmbreStepDefs {
         registrationPage = new RegistrationPage(driver);
         deliveryPage = new DeliveryPage(driver);
         paymentPage = new PaymentPage(driver);
+        checkoutPage = new CheckoutPage(driver);
     }
 
     @After
@@ -168,5 +170,9 @@ public class OmbreStepDefs {
 
     @And("^user makes checkout$")
     public void userMakesCheckout() {
+        cartPage.checkoutClick();
+        Assert.assertThat(checkoutPage.getPageTitle(), is(equalTo("Checkout page")));
+        Assert.assertThat(cartPage.getNumberOfProductsInCart(), is(equalTo("")));
+
     }
 }

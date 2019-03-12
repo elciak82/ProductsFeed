@@ -19,6 +19,7 @@ public class CartPage extends MainPage {
     private String registrationCss = ".fa-user";
     private String deliveryCss = ".fa-truck";
     private String paymentCss = ".fa-money-bill-alt";
+    private String checkoutCss = ".fa-flag-checkered";
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -86,6 +87,11 @@ public class CartPage extends MainPage {
     public void paymentClick(){
         WebElement payment = driver.findElement(By.cssSelector(paymentCss));
         payment.click();
+    }
+
+    public void checkoutClick(){
+        WebElement checkout = driver.findElement(By.cssSelector(checkoutCss));
+        checkout.click();
     }
 
 //    public String getProductPrice (String productName){
