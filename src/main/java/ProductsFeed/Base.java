@@ -1,10 +1,7 @@
 package ProductsFeed;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,7 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Base {
+public class Base<T extends Base<T>> {
 
     protected WebDriver driver;
 
@@ -39,5 +36,13 @@ public class Base {
                 };
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(pageLoadCondition);
+    }
+
+    public WebElement findElement(CSSElement<T> cssElement) {
+        return driver.findElement(By.cssSelector(cssElement.getValue()));
+    }
+
+    public void click(CSSElement<T> cssElement) {
+        findElement(cssElement).click();
     }
 }

@@ -36,7 +36,7 @@ public class OmbreStepDefs {
     @Before
     public void startUp() {
         driver = new ChromeDriver();
-        url = new Url();
+//        url = new Url();
         base = new Base(driver);
         mainPage = new MainPage(driver);
         allProductsPage = new AllProductsPage(driver);
@@ -60,7 +60,7 @@ public class OmbreStepDefs {
     public void userIsOnHomepage() {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.get(url.ombre);
+        driver.get(Url.ombre);
         Assert.assertThat(allProductsPage.getPageTitle(), is(equalTo("Products page")));
     }
 
@@ -109,7 +109,7 @@ public class OmbreStepDefs {
 
     @When("^user clicks on the cart$")
     public void userClicksOnTheCart() {
-        mainPage.clickCartIcon();
+        mainPage.click(MainPage.CSS.CART_ICON);
         base.waitForLoad(driver);
     }
 

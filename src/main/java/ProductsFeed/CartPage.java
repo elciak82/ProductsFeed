@@ -94,6 +94,15 @@ public class CartPage extends MainPage {
         checkout.click();
     }
 
+    public enum CSS implements CSSElement<CartPage> {
+        asdfas;
+
+        @Override
+        public String getValue() {
+            return null;
+        }
+    }
+
 //    public String getProductPrice (String productName){
 //        int size = productInCartNameCss.size();
 //        int i = 0;

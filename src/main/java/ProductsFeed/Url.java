@@ -1,5 +1,5 @@
 package ProductsFeed;
 
 public class Url {
-    String ombre = "https://ombre.revhunter.pl/";
+    public static final String ombre = "https://ombre.revhunter.pl/";
 }

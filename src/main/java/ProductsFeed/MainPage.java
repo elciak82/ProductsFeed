@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage extends Base{
+public class MainPage extends Base<MainPage>{
 
     String homeIconCss = ".fa-home";
     String cartIconCss = "div#header a:nth-child(2)";
@@ -22,8 +22,7 @@ public class MainPage extends Base{
     }
 
     public void clickCartIcon(){
-        WebElement cartIcon = driver.findElement(By.cssSelector(cartIconCss));
-        cartIcon.click();
+        click(CSS.CART_ICON);
     }
 
     public String getNumberOfProductsInCart() {
@@ -45,5 +44,22 @@ public class MainPage extends Base{
     public void waitForCart(){
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cartIconCss)));
+    }
+
+    public enum CSS implements CSSElement<MainPage> {
+        HOME_ICON(".fa-home"),
+        CART_ICON("div#header a:nth-child(2)"),
+        CART_COUNT("div#header a:nth-child(2)");
+
+        private String value;
+
+        CSS(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
     }
 }
