@@ -11,7 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Base<T extends Base<T>> {
+public class Base<T extends Base> {
 
     protected WebDriver driver;
 
@@ -38,11 +38,11 @@ public class Base<T extends Base<T>> {
         wait.until(pageLoadCondition);
     }
 
-    public WebElement findElement(CSSElement<T> cssElement) {
+    public WebElement findElement(CSSElement<? super T> cssElement) {
         return driver.findElement(By.cssSelector(cssElement.getValue()));
     }
 
-    public void click(CSSElement<T> cssElement) {
+    public void click(CSSElement<? super T> cssElement) {
         findElement(cssElement).click();
     }
 }

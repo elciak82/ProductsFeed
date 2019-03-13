@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllProductsPage extends MainPage{
+public class AllProductsPage extends MainPage<AllProductsPage>{
 
     String productTileCss = "div.product";
     String productNameTileCss = "p.name";
@@ -44,10 +44,13 @@ public class AllProductsPage extends MainPage{
 
     public List<String> getProductsPricesFromTile (List<Integer> productsList){
         List<WebElement> productsPrices = driver.findElements(By.cssSelector(productPriceTileCss));
+//        return productsList.stream()
+//                .map(id -> productsPrices.get(id).getText())
+//                .collect(Collectors.toList());
         List<String> listOfPrices = new ArrayList<>();
         for (int productNumber:productsList) {
             System.out.println("Add product number " + productNumber + " to the cart.");
-            productsPrices.get(productNumber).getText();
+            listOfPrices.add(productsPrices.get(productNumber).getText());
         }
         return listOfPrices;
     }

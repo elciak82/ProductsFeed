@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage extends Base<MainPage>{
+public class MainPage<T extends MainPage> extends Base<T>{
 
     String homeIconCss = ".fa-home";
     String cartIconCss = "div#header a:nth-child(2)";
