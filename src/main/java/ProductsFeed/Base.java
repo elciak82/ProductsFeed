@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Base<T extends Base> {
 
@@ -38,11 +39,18 @@ public class Base<T extends Base> {
         wait.until(pageLoadCondition);
     }
 
-    public WebElement findElement(CSSElement<? super T> cssElement) {
-        return driver.findElement(By.cssSelector(cssElement.getValue()));
+    public WebElement findElement(String element) {
+        return driver.findElement(By.cssSelector(element));
     }
 
-    public void click(CSSElement<? super T> cssElement) {
-        findElement(cssElement).click();
+    public List<WebElement> findElements(String element) {
+        return driver.findElements(By.cssSelector(element));
     }
+
+    public void click(String element) {
+        findElement(element).click();
+    }
+
+//    public void click(String element, int index) {
+//        findElements(element).get(index).click();
 }

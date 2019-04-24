@@ -1,6 +1,5 @@
 package ProductsFeed;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,107 +9,75 @@ import java.util.List;
 
 public class CartPage extends MainPage {
 
-    private String productPriceCss = ".product_price";
-    private String productNameCss = "table#cart tbody tr td:nth-child(2)"; //table z id (#) -> tbody -> tr -> td:nth-child(2)!! w td ente dzecko - child(2) za każdym razem
-    private String pageTitleCss = "div#content h1";
-    private String quantityCss = ".product_quantity";
-    private String trashCss =".product_remove";
-    private String productCountCss ="#product_count";
-    private String registrationCss = ".fa-user";
-    private String deliveryCss = ".fa-truck";
-    private String paymentCss = ".fa-money-bill-alt";
-    private String checkoutCss = ".fa-flag-checkered";
-
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
     public boolean verifyTrashNotDisplayed() {
-        WebElement trash = driver.findElement(By.cssSelector(trashCss));
         try {
-            return (!trash.isDisplayed());
+            return (!findElement(CssCartPage.trash).isDisplayed());
         } catch (Exception e) {
             return false;
         }
     }
 
     public String getPageTitle(){
-        WebElement pageTitle = driver.findElement(By.cssSelector(pageTitleCss));
-        System.out.println("Page title is: " + pageTitle.getText() + ".");
-        return pageTitle.getText();
+        return findElement(CssCartPage.pageTitle).getText();
     }
 
     public String getProductQuantity(){
-        WebElement quantity = driver.findElement(By.cssSelector(quantityCss));
-        System.out.println("Product quantity is: " + quantity.getAttribute("value") + ".");
-        return quantity.getAttribute("value");
+        return findElement(CssCartPage.quantity).getAttribute("value");
     }
 
     public void removeProductFromCart(){
-        WebElement trash = driver.findElement(By.cssSelector(trashCss));
-        trash.click();
+        click(CssCartPage.trash);
         WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.invisibilityOf(trash));
+        wait.until(ExpectedConditions.invisibilityOf(findElement(CssCartPage.trash)));
     }
 
     public String getProductCount(){
-        WebElement productCount = driver.findElement(By.cssSelector(productCountCss));
-        return productCount.getText();
+        return findElement(CssCartPage.productCount).getText();
     }
 
     public String getProductPrice (int productNumber){
-        List<WebElement> productInCartPrice = driver.findElements(By.cssSelector(productPriceCss));
-        String productPrice = productInCartPrice.get(productNumber).getText();
-        System.out.println("Product number: " + productNumber + " price is " + productPrice + ".");
-        return productPrice;
+        List<WebElement> elements = findElements(CssCartPage.productPrice);
+        return elements.get(productNumber).getText();
     }
 
     public void removeAllProductFromCart() {
-        List<WebElement> trashList = driver.findElements(By.cssSelector(trashCss));
-        int elementsInTrash = trashList.size();
-        for (int i = 0; i<elementsInTrash; i++) {
-            trashList.get(i).click();
+        List<WebElement> trashList = findElements(CssCartPage.trash);
+        for (WebElement element:trashList) {
+            element.click();
         }
-        driver.navigate().refresh();
     }
 
     public void registrationClick(){
-        WebElement registration = driver.findElement(By.cssSelector(registrationCss));
-        registration.click();
+        click((CssCartPage.registration));
     }
 
     public void deliveryClick(){
-        WebElement delivery = driver.findElement(By.cssSelector(deliveryCss));
-        delivery.click();
+        click(CssCartPage.delivery);
     }
 
     public void paymentClick(){
-        WebElement payment = driver.findElement(By.cssSelector(paymentCss));
-        payment.click();
+       click(CssCartPage.payment);
     }
 
     public void checkoutClick(){
-        WebElement checkout = driver.findElement(By.cssSelector(checkoutCss));
-        checkout.click();
+        click(CssCartPage.checkout);
     }
 
-    public enum CSS implements CSSElement<CartPage> {
-        asdfas;
-
-        @Override
-        public String getValue() {
-            return null;
-        }
+    private static class CssCartPage {
+        private static String productPrice = ".product_price";
+        private static String productName = "table#cart tbody tr td:nth-child(2)"; //table z id (#) -> tbody -> tr -> td:nth-child(2)!! w td ente dzecko - child(2) za każdym razem
+        private static String pageTitle = "div#content h1";
+        private static String quantity = ".product_quantity";
+        private static String trash =".product_remove";
+        private static String productCount ="#product_count";
+        private static String registration = ".fa-user";
+        private static String delivery = ".fa-truck";
+        private static String payment = ".fa-money-bill-alt";
+        private static String checkout = ".fa-flag-checkered";
     }
 
-//    public String getProductPrice (String productName){
-//        int size = productInCartNameCss.size();
-//        int i = 0;
-//        while(!productInCartName.get(i).getText().equals(productName) && i < size) {
-//            i++;
-//        }
-//        String productPrice = productInCartPrice.get(i).getText();
-//        System.out.println("Product: " + productName + "price: " + productPrice + ".");
-//        return productPrice;
-//    }
 }

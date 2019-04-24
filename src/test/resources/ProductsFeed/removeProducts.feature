@@ -1,4 +1,4 @@
-#@ombreTest
+@ombreTest
 Feature: User removes products from the cart
   Verify if user is able to remove a product from cart
 

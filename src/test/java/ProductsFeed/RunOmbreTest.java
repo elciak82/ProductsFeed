@@ -11,6 +11,6 @@ import org.junit.runner.RunWith;
 //        features = "src/test/resources/ProductsFeed/addProducts.feature",
         plugin = {"pretty", "html:target/cucumber-html-report"}
 //        ,glue = {"ProductsFeed"}
-        )
+)
 public class RunOmbreTest {
 }

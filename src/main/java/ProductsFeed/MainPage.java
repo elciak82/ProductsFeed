@@ -22,7 +22,7 @@ public class MainPage<T extends MainPage> extends Base<T>{
     }
 
     public void clickCartIcon(){
-        click(CSS.CART_ICON);
+        click(cartIconCss);
     }
 
     public String getNumberOfProductsInCart() {

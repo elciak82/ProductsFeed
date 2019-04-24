@@ -1,4 +1,4 @@
-#@ombreTest
+@ombreTest
 Feature: User adds products to the cart
   Verify if user is able to adds a product to cart
 
