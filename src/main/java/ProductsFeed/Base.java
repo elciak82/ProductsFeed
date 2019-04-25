@@ -16,11 +16,11 @@ public class Base<T extends Base> {
 
     protected WebDriver driver;
 
-    public Base(WebDriver driver) {
+    Base(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void takeScreenshot() throws IOException {
+    void takeScreenshot() throws IOException {
         String location = "C://Users//ewelina//IdeaProjects//Screenshots//";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss"); // add S if you need milliseconds
         System.out.println("Take a screenshot.");
@@ -28,7 +28,7 @@ public class Base<T extends Base> {
         FileUtils.copyFile(src, new File(location + df.format(new Date()) + " screenshot.png"));
     }
 
-    public void waitForLoad(WebDriver driver) {
+    void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = new
                 ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {

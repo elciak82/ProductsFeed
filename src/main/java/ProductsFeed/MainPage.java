@@ -11,32 +11,31 @@ public class MainPage<T extends MainPage> extends Base<T>{
     }
 
     public void clickHomeIcon(){
-        click(CssMainPage.homeIcon);
+        click(CSS.homeIcon);
     }
 
     void clickCartIcon(){
-        click(CssMainPage.cartIcon);
+        click(CSS.cartIcon);
     }
 
     String getNumberOfProductsInCart() {
-        return findElement(CssMainPage.cartCount).getText();
+        return findElement(CSS.cartCount).getText();
     }
 
     public boolean cartHasRedColor() {
-        if (findElement(CssMainPage.cartIcon).getCssValue("color").equals("#ac2925")) {
+        if (findElement(CSS.cartIcon).getCssValue("color").equals("#ac2925")) {
             return true;
         }else {
-            System.out.println("Cart icon is not red");
             return false;
         }
     }
 
     void waitForCart(){
         WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.elementToBeClickable(findElement(CssMainPage.cartIcon)));
+        wait.until(ExpectedConditions.elementToBeClickable(findElement(CSS.cartIcon)));
     }
 
-    private static class CssMainPage {
+    private static class CSS {
         private static String homeIcon = ".fa-home";
         private static String cartIcon = "div#header a:nth-child(2)";
         private static String cartCount = "#cart_count";

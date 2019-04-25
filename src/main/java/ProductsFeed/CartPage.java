@@ -15,37 +15,37 @@ public class CartPage extends MainPage {
 
     public boolean verifyTrashNotDisplayed() {
         try {
-            return (!findElement(CssCartPage.trash).isDisplayed());
+            return (!findElement(CSS.trash).isDisplayed());
         } catch (Exception e) {
             return false;
         }
     }
 
     String getPageTitle(){
-        return findElement(CssCartPage.pageTitle).getText();
+        return findElement(CSS.pageTitle).getText();
     }
 
     String getProductQuantity(){
-        return findElement(CssCartPage.quantity).getAttribute("value");
+        return findElement(CSS.quantity).getAttribute("value");
     }
 
     void removeProductFromCart(){
-        click(CssCartPage.trash);
+        click(CSS.trash);
         WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.invisibilityOf(findElement(CssCartPage.trash)));
+        wait.until(ExpectedConditions.invisibilityOf(findElement(CSS.trash)));
     }
 
     String getProductCount(){
-        return findElement(CssCartPage.productCount).getText();
+        return findElement(CSS.productCount).getText();
     }
 
     String getProductPrice (int productNumber){
-        List<WebElement> elements = findElements(CssCartPage.productPrice);
+        List<WebElement> elements = findElements(CSS.productPrice);
         return elements.get(productNumber).getText();
     }
 
     void removeAllProductFromCart() {
-        List<WebElement> trashList = findElements(CssCartPage.trash);
+        List<WebElement> trashList = findElements(CSS.trash);
         for (WebElement element:trashList) {
             element.click();
         }
@@ -53,22 +53,22 @@ public class CartPage extends MainPage {
     }
 
     void registrationClick(){
-        click((CssCartPage.registration));
+        click((CSS.registration));
     }
 
     void deliveryClick(){
-        click(CssCartPage.delivery);
+        click(CSS.delivery);
     }
 
     void paymentClick(){
-       click(CssCartPage.payment);
+       click(CSS.payment);
     }
 
     void checkoutClick(){
-        click(CssCartPage.checkout);
+        click(CSS.checkout);
     }
 
-    private static class CssCartPage {
+    private static class CSS {
         private static String productPrice = ".product_price";
         private static String productName = "table#cart tbody tr td:nth-child(2)"; //table z id (#) -> tbody -> tr -> td:nth-child(2)!! w td ente dzecko - child(2) za każdym razem
         private static String pageTitle = "div#content h1";
