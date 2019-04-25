@@ -1,7 +1,6 @@
 package ProductsFeed;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +28,9 @@ class AllProductsPage extends MainPage<AllProductsPage>{
     }
 
     private List<String> getProductsPricesFromTile (List<Integer> productsList){
-        List<WebElement> productsPrices = findElements(CssAllProductPage.productPriceTile);
         List<String> listOfPrices = new ArrayList<>();
         for (int productNumber:productsList) {
-            listOfPrices.add(productsPrices.get(productNumber).getText());
+            listOfPrices.add(findElements(CssAllProductPage.productPriceTile).get(productNumber).getText());
         }
         return listOfPrices;
     }

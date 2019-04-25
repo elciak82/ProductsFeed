@@ -9,11 +9,11 @@ class CheckoutPage extends MainPage {
     }
 
     String getPageTitle(){
-        return findElement(CssCheckoutPage.pageTitleCss).getText();
+        return findElement(CssCheckoutPage.pageTitle).getText();
     }
 
     private static class CssCheckoutPage {
-        private static String pageTitleCss = "div#content h1";
+        private static String pageTitle = "div#content h1";
     }
 
 }
