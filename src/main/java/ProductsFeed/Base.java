@@ -39,18 +39,15 @@ public class Base<T extends Base> {
         wait.until(pageLoadCondition);
     }
 
-    public WebElement findElement(String element) {
+    WebElement findElement(String element) {
         return driver.findElement(By.cssSelector(element));
     }
 
-    public List<WebElement> findElements(String element) {
+    List<WebElement> findElements(String element) {
         return driver.findElements(By.cssSelector(element));
     }
 
-    public void click(String element) {
+    void click(String element) {
         findElement(element).click();
     }
-
-//    public void click(String element, int index) {
-//        findElements(element).get(index).click();
 }

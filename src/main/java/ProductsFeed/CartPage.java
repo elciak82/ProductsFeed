@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CartPage extends MainPage {
 
-    public CartPage(WebDriver driver) {
+    CartPage(WebDriver driver) {
         super(driver);
     }
 
@@ -21,49 +21,50 @@ public class CartPage extends MainPage {
         }
     }
 
-    public String getPageTitle(){
+    String getPageTitle(){
         return findElement(CssCartPage.pageTitle).getText();
     }
 
-    public String getProductQuantity(){
+    String getProductQuantity(){
         return findElement(CssCartPage.quantity).getAttribute("value");
     }
 
-    public void removeProductFromCart(){
+    void removeProductFromCart(){
         click(CssCartPage.trash);
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.invisibilityOf(findElement(CssCartPage.trash)));
     }
 
-    public String getProductCount(){
+    String getProductCount(){
         return findElement(CssCartPage.productCount).getText();
     }
 
-    public String getProductPrice (int productNumber){
+    String getProductPrice (int productNumber){
         List<WebElement> elements = findElements(CssCartPage.productPrice);
         return elements.get(productNumber).getText();
     }
 
-    public void removeAllProductFromCart() {
+    void removeAllProductFromCart() {
         List<WebElement> trashList = findElements(CssCartPage.trash);
         for (WebElement element:trashList) {
             element.click();
         }
+        driver.navigate().refresh();
     }
 
-    public void registrationClick(){
+    void registrationClick(){
         click((CssCartPage.registration));
     }
 
-    public void deliveryClick(){
+    void deliveryClick(){
         click(CssCartPage.delivery);
     }
 
-    public void paymentClick(){
+    void paymentClick(){
        click(CssCartPage.payment);
     }
 
-    public void checkoutClick(){
+    void checkoutClick(){
         click(CssCartPage.checkout);
     }
 
