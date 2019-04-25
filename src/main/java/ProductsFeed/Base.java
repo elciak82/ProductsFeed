@@ -21,8 +21,9 @@ public class Base<T extends Base> {
     }
 
     void takeScreenshot() throws IOException {
-        String location = "C://Users//ewelina//IdeaProjects//Screenshots//";
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss"); // add S if you need milliseconds
+        String location = "./Screenshots//";
+        /* add S if you need milliseconds */
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         System.out.println("Take a screenshot.");
         File src =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(src, new File(location + df.format(new Date()) + " screenshot.png"));

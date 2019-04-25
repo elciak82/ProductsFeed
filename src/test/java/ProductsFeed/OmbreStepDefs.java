@@ -109,7 +109,7 @@ public class OmbreStepDefs {
 
     @When("^user clicks on the cart$")
     public void userClicksOnTheCart() {
-        base.click(mainPage.cartIconCss);
+        mainPage.clickCartIcon();
         base.waitForLoad(driver);
     }
 
